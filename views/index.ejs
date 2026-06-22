@@ -4,41 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Butter Smooth Scroll Animation</title>
+    <style>
+        /* Reset and optimize rendering */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: #18181b;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100vh;
+            image-rendering: auto;
+            /* Prevent anti-aliasing overhead */
+            ;
+        }
+
+        .parent {
+            will-change: transform;
+            /* GPU acceleration hint */
+            ;
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="w-full bg-zinc-900">
-        <div class="parent relative top-0 left-0 w-full h-[700vh] bg-zinc-900">
-            <div class="  w-full sticky top-0 left-0 h-screen">
+        <div class="parent relative top-0 left-0 w-full h-[500vh] bg-zinc-900">
+            <div class="w-full sticky top-0 left-0 h-screen">
                 <canvas class="w-full h-screen" id="frame"></canvas>
             </div>
         </div>
     </div>
 
-
-    <!-- scroll triggerplugin -->
+    <!-- GSAP and ScrollTrigger - Only one version needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-
-    <!-- CDN  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
-        integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- tailwindcss  -->
+    <!-- tailwindcss -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Animation Script -->
-
     <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
 
         const canvas = document.getElementById("frame");
-        const context = canvas.getContext("2d");
+        const context = canvas.getContext("2d", {
+            alpha: false, // Disable transparency for better performance
+            willReadFrequently: false
+        });
 
-        gsap.registerPlugin(ScrollTrigger);
+        // Set canvas size once
+        let canvasWidth = window.innerWidth;
+        let canvasHeight = window.innerHeight;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
 
         const frames = {
             currentIndex: 0,
@@ -47,12 +76,15 @@
 
         let imagesLoaded = 0;
         let images = [];
+        let lastLoadedIndex = -1;
+        let isAnimating = false;
 
+        // Preload all images
         function preloadImages() {
             for (var i = 0; i < frames.maxIndex; i++) {
                 const imgUrl = `./images/frame_${(i + 1).toString().padStart(4, "0")}.jpeg`;
                 const img = new Image();
-                img.src = imgUrl;
+                img.decoding = 'async'; // Decode asynchronously
 
                 img.onload = () => {
                     imagesLoaded++;
@@ -62,34 +94,54 @@
                         startAnimation();
                     }
                 };
-                images[i] = img; // Now images[0] = first image, images[1] = second image, etc.
+
+                img.onerror = () => {
+                    console.error(`Failed to load: ${imgUrl}`);
+                    imagesLoaded++;
+                    if (imagesLoaded === frames.maxIndex) {
+                        console.log("All images loaded (with errors)");
+                        loadImage(frames.currentIndex);
+                        startAnimation();
+                    }
+                };
+
+                images[i] = img;
+                img.src = imgUrl;
             }
         }
 
+        // Optimized image loading with caching
         function loadImage(index) {
-            if (index >= 0 && index <= frames.maxIndex) {
-                const image = images[index];
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            // Skip if already loaded or out of bounds
+            if (index === lastLoadedIndex) return;
+            if (index < 0 || index >= frames.maxIndex) return;
+
+            const image = images[index];
+            if (!image || !image.complete) return;
+
+            lastLoadedIndex = index;
+
+            // Use requestAnimationFrame for smooth rendering
+            requestAnimationFrame(() => {
+                // Fill with dark background (faster than clearing)
+                context.fillStyle = '#18181b';
+                context.fillRect(0, 0, canvas.width, canvas.height);
 
                 const scaleX = canvas.width / image.width;
                 const scaleY = canvas.height / image.height;
-
                 const scale = Math.max(scaleX, scaleY);
 
                 const newWidth = image.width * scale;
                 const newHeight = image.height * scale;
-
                 const offsetX = (canvas.width - newWidth) / 2;
                 const offsetY = (canvas.height - newHeight) / 2;
 
-                context.clearRect(0, 0, canvas.width, canvas.height);
                 context.imageSmoothingEnabled = true;
                 context.imageSmoothingQuality = 'high';
                 context.drawImage(image, offsetX, offsetY, newWidth, newHeight);
-                frames.currentIndex = index;
 
-            }
+                frames.currentIndex = index;
+            });
         }
 
         function startAnimation() {
@@ -98,17 +150,44 @@
                     trigger: ".parent",
                     start: "top top",
                     end: "bottom bottom",
-                    scrub: true,
-                    markers: true,
+                    scrub: 0.5, // Smoother than "true"
+                    markers: false, // Disable in production
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1, // Smoother pinning
                 }
             });
 
             tl.to(frames, {
                 currentIndex: frames.maxIndex - 1,
-                onUpdate: () => loadImage(Math.floor(frames.currentIndex)),
+                ease: "none",
+                duration: 1,
+                onUpdate: () => {
+                    const index = Math.floor(frames.currentIndex);
+                    if (index !== lastLoadedIndex) {
+                        loadImage(index);
+                    }
+                }
             });
         }
 
+        // Throttled resize handler
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                canvasWidth = window.innerWidth;
+                canvasHeight = window.innerHeight;
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+
+                // Reload current image with new size
+                if (images[frames.currentIndex]) {
+                    loadImage(frames.currentIndex);
+                }
+            }, 100);
+        });
+
+        // Start preloading
         preloadImages();
     </script>
 </body>
