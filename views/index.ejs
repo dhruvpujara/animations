@@ -2,41 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Butter Smooth Scroll Animation</title>
-    <style>
-        /* Reset and optimize rendering */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dhruv Pujara // Portfolio</title>
 
-        body {
-            overflow-x: hidden;
-            background: #18181b;
-        }
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@400;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
 
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100vh;
-            image-rendering: auto;
-            /* Prevent anti-aliasing overhead */
-            ;
-        }
-
-        .parent {
-            will-change: transform;
-            /* GPU acceleration hint */
-            ;
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="nav-brand">
+                <span class="material-symbol">terminal</span>
+                DHRUV_PUJARA:/$
+            </a>
+            <div class="nav-links">
+                <a href="#expertise">Expertise</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+                <a href="#" class="btn-primary btn-small">RESUME.PDF</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span class="material-symbol">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    SCROLL ANIMATION (FRAME SEQUENCE)
+    ============================================================ -->
     <div class="w-full bg-zinc-900">
         <div class="parent relative top-0 left-0 w-full h-[500vh] bg-zinc-900">
             <div class="w-full sticky top-0 left-0 h-screen">
@@ -45,151 +51,296 @@
         </div>
     </div>
 
-    <!-- GSAP and ScrollTrigger - Only one version needed -->
+    <!-- ============================================================
+    HERO WITH SHADER BACKGROUND
+    ============================================================ -->
+    <section class="hero">
+        <!-- Shader Canvas -->
+        <div class="hero-shader" id="shader-container">
+            <canvas id="shader-canvas"></canvas>
+        </div>
+
+        <!-- Overlays -->
+        <div class="hero-overlay"></div>
+        <div class="hero-scanline"></div>
+
+        <!-- Content -->
+        <div class="container hero-content">
+            <div class="hero-status">
+                <span class="status-dot"></span>
+                SYSTEM_STATUS: ONLINE
+            </div>
+
+            <h1 class="hero-title">
+                I'm Dhruv Pujara<span class="cursor">_</span>
+            </h1>
+
+            <p class="hero-subtitle">Professional Web Developer</p>
+
+            <p class="hero-description">
+                I create stunning, responsive websites and web applications with cutting-edge technologies.
+                My focus is on delivering exceptional user experiences with clean, efficient code.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#portfolio" class="btn-primary">
+                    VIEW WORK
+                    <span class="material-symbol" style="font-size: 18px;">arrow_forward</span>
+                </a>
+                <a href="#contact" class="btn-secondary">
+                    GET A QUOTE
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="material-symbol">speed</span>
+                    <span>Fast Delivery</span>
+                </div>
+                <div class="stat-item">
+                    <span class="material-symbol">verified</span>
+                    <span>Quality Guaranteed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="material-symbol">payments</span>
+                    <span>Best Prices</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    EXPERTISE
+    ============================================================ -->
+    <section id="expertise">
+        <div class="container">
+            <div class="section-label">[ 01. EXPERTISE ]</div>
+            <h2 class="section-title">Technical Proficiency</h2>
+
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <span class="material-symbol">new_window</span>
+                    <h4>Frontend Development</h4>
+                    <p>Crafting beautiful, responsive interfaces using HTML, CSS, and JavaScript with modern frameworks.
+                    </p>
+                    <div class="tech-tags">[ REACT / VUE / TW ]</div>
+                </div>
+                <div class="expertise-card">
+                    <span class="material-symbol">database</span>
+                    <h4>Backend Development</h4>
+                    <p>Building robust server-side applications with Node.js, Express, and modern database management.
+                    </p>
+                    <div class="tech-tags">[ NODE / MONGO / SQL ]</div>
+                </div>
+                <div class="expertise-card">
+                    <span class="material-symbol">devices</span>
+                    <h4>Responsive Design</h4>
+                    <p>Creating websites that work perfectly on all devices from mobile phones to high-end desktops.</p>
+                    <div class="tech-tags">[ MOBILE-FIRST ]</div>
+                </div>
+                <div class="expertise-card">
+                    <span class="material-symbol">rocket_launch</span>
+                    <h4>Performance Optimization</h4>
+                    <p>Ensuring fast loading times and smooth user experiences through code optimization and best
+                        practices.</p>
+                    <div class="tech-tags">[ LIGHTHOUSE / 99+ ]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PORTFOLIO
+    ============================================================ -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-label">[ 02. PORTFOLIO ]</div>
+            <h2 class="section-title">Featured Works</h2>
+
+            <div class="project-card">
+                <!-- Media Column -->
+                <div class="project-media">
+                    <div class="project-media-inner">
+                        <!-- Window Header -->
+                        <div class="window-header">
+                            <span class="window-dot red"></span>
+                            <span class="window-dot yellow"></span>
+                            <span class="window-dot green"></span>
+                            <span class="window-title">DD_MUSIC_29 // DEPLOYED</span>
+                        </div>
+                        <!-- Thumbnail -->
+                        <div class="project-thumbnail">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmT0an1Xu0FP3EpaekThwY38klEK89yY5zdMInJIBG3DdcCNk95vML9gVKu3N84XWxeE9RNvwQLsHFl4ysH4C-t9FonJ85ClEjVKDn0nkZcVRf-2EtW7BfjBJ-dhdHCmzKdfaUuOiHyvBT0ExjXFMDtwmfRMWmx73qR-qDm417tA5H3WwojL1RObSKPM4IcEnyxtMw5g8ZzI47J5eFS9m8sLOH8iDN8W_g8rHMHmJjVziDpKwNixelvIzj95laQ06xk3ihZSbc_2A"
+                                alt="DD Music Project" />
+                            <div class="project-overlay">
+                                <span class="material-symbol">play_circle</span>
+                            </div>
+                        </div>
+                        <!-- Footer -->
+                        <div class="project-footer">
+                            <div class="track-info">
+                                <div class="icon-group">
+                                    <span class="material-symbol">graphic_eq</span>
+                                    <div>
+                                        <div class="track-label">Currently Playing</div>
+                                        <div class="track-name">System Audio Stream</div>
+                                    </div>
+                                </div>
+                                <div class="volume-control">
+                                    <span class="material-symbol" style="font-size:18px;">volume_up</span>
+                                    <div class="volume-bar">
+                                        <div class="volume-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Column -->
+                <div class="project-info">
+                    <div class="project-code">#001 // WEB_APP</div>
+                    <h4>Ad-Free Music Streaming</h4>
+                    <p>
+                        DD Music 29 is a completely free, ad-free music streaming web application
+                        developed to provide uninterrupted listening. Featuring a vast library across
+                        genres with no subscription fees. Optimized for low-latency performance and
+                        cross-device compatibility.
+                    </p>
+                    <div class="project-tags">
+                        <span>[ HTML5 ]</span>
+                        <span>[ CSS3 ]</span>
+                        <span>[ NODE.JS ]</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="#" class="btn-primary btn-compact">
+                            EXECUTE_LAUNCH_SITE
+                            <span class="material-symbol" style="font-size:16px;">open_in_new</span>
+                        </a>
+                        <a href="#" class="btn-secondary btn-compact">
+                            SOURCE_CODE
+                            <span class="material-symbol" style="font-size:16px;">code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CONTACT
+    ============================================================ -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-label">[ 03. CONTACT ]</div>
+            <h2 class="section-title">Get In Touch</h2>
+
+            <div class="contact-grid">
+                <!-- Left: Contact Info -->
+                <div class="contact-info">
+                    <p>Let's discuss your project and bring your ideas to life. I'm available for remote projects
+                        worldwide.</p>
+
+                    <div class="contact-item">
+                        <div class="icon-box">
+                            <span class="material-symbol">call</span>
+                        </div>
+                        <div>
+                            <div class="label">PHONE</div>
+                            <div class="value">+91 7046056443</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon-box">
+                            <span class="material-symbol">alternate_email</span>
+                        </div>
+                        <div>
+                            <div class="label">EMAIL</div>
+                            <div class="value">pujaradhruv373@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Contact Form -->
+                <div class="contact-form">
+                    <form onsubmit="event.preventDefault(); alert('Message sent to system console.');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>USER_NAME</label>
+                                <input type="text" placeholder="John Doe" />
+                            </div>
+                            <div class="form-group">
+                                <label>USER_EMAIL</label>
+                                <input type="email" placeholder="john@example.com" />
+                            </div>
+                        </div>
+
+                        <div class="form-full">
+                            <div class="form-group">
+                                <label>MESSAGE_PAYLOAD</label>
+                                <textarea placeholder="Brief project description..." rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="form-submit">EXECUTE_SEND_REQUEST</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <div class="footer-brand">DHRUV_PUJARA</div>
+                <div class="footer-copy">© 2024 DHRUV_PUJARA // SYSTEM_READY</div>
+            </div>
+
+            <div class="footer-socials">
+                <a href="#" aria-label="GitHub">
+                    <span class="material-symbol">terminal</span>
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                    <span class="material-symbol">hub</span>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <span class="material-symbol">filter_frames</span>
+                </a>
+            </div>
+
+            <div class="footer-meta">
+                LATENCY: 12ms // SERVER: RENDER_CLOUD<br />
+                BUILD_HASH: <span class="highlight">7A4F9E2</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    <!-- tailwindcss -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Animation Script -->
-    <script>
-        // Register ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+    <!-- Scroll Animation -->
+    <script src="js/scroll-animation.js"></script>
 
-        const canvas = document.getElementById("frame");
-        const context = canvas.getContext("2d", {
-            alpha: false, // Disable transparency for better performance
-            willReadFrequently: false
-        });
+    <!-- Shader Animation -->
+    <script src="js/shader-animation.js"></script>
 
-        // Set canvas size once
-        let canvasWidth = window.innerWidth;
-        let canvasHeight = window.innerHeight;
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
+    <!-- UI Interactions -->
+    <script src="js/ui.js"></script>
 
-        const frames = {
-            currentIndex: 0,
-            maxIndex: 479
-        };
-
-        let imagesLoaded = 0;
-        let images = [];
-        let lastLoadedIndex = -1;
-        let isAnimating = false;
-
-        // Preload all images
-        function preloadImages() {
-            for (var i = 0; i < frames.maxIndex; i++) {
-                const imgUrl = `./images/frame_${(i + 1).toString().padStart(4, "0")}.jpeg`;
-                const img = new Image();
-                img.decoding = 'async'; // Decode asynchronously
-
-                img.onload = () => {
-                    imagesLoaded++;
-                    if (imagesLoaded === frames.maxIndex) {
-                        console.log("All images loaded");
-                        loadImage(frames.currentIndex);
-                        startAnimation();
-                    }
-                };
-
-                img.onerror = () => {
-                    console.error(`Failed to load: ${imgUrl}`);
-                    imagesLoaded++;
-                    if (imagesLoaded === frames.maxIndex) {
-                        console.log("All images loaded (with errors)");
-                        loadImage(frames.currentIndex);
-                        startAnimation();
-                    }
-                };
-
-                images[i] = img;
-                img.src = imgUrl;
-            }
-        }
-
-        // Optimized image loading with caching
-        function loadImage(index) {
-            // Skip if already loaded or out of bounds
-            if (index === lastLoadedIndex) return;
-            if (index < 0 || index >= frames.maxIndex) return;
-
-            const image = images[index];
-            if (!image || !image.complete) return;
-
-            lastLoadedIndex = index;
-
-            // Use requestAnimationFrame for smooth rendering
-            requestAnimationFrame(() => {
-                // Fill with dark background (faster than clearing)
-                context.fillStyle = '#18181b';
-                context.fillRect(0, 0, canvas.width, canvas.height);
-
-                const scaleX = canvas.width / image.width;
-                const scaleY = canvas.height / image.height;
-                const scale = Math.max(scaleX, scaleY);
-
-                const newWidth = image.width * scale;
-                const newHeight = image.height * scale;
-                const offsetX = (canvas.width - newWidth) / 2;
-                const offsetY = (canvas.height - newHeight) / 2;
-
-                context.imageSmoothingEnabled = true;
-                context.imageSmoothingQuality = 'high';
-                context.drawImage(image, offsetX, offsetY, newWidth, newHeight);
-
-                frames.currentIndex = index;
-            });
-        }
-
-        function startAnimation() {
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".parent",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 0.5, // Smoother than "true"
-                    markers: false, // Disable in production
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1, // Smoother pinning
-                }
-            });
-
-            tl.to(frames, {
-                currentIndex: frames.maxIndex - 1,
-                ease: "none",
-                duration: 1,
-                onUpdate: () => {
-                    const index = Math.floor(frames.currentIndex);
-                    if (index !== lastLoadedIndex) {
-                        loadImage(index);
-                    }
-                }
-            });
-        }
-
-        // Throttled resize handler
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                canvasWidth = window.innerWidth;
-                canvasHeight = window.innerHeight;
-                canvas.width = canvasWidth;
-                canvas.height = canvasHeight;
-
-                // Reload current image with new size
-                if (images[frames.currentIndex]) {
-                    loadImage(frames.currentIndex);
-                }
-            }, 100);
-        });
-
-        // Start preloading
-        preloadImages();
-    </script>
 </body>
 
 </html>
