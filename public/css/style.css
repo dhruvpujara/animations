@@ -668,13 +668,69 @@ section {
     margin-bottom: 16px;
 }
 
-.project-info p {
+/* ============================================================
+   PROJECT STORY / SHOW MORE - UPDATED
+   ============================================================ */
+.project-story {
+    margin-bottom: 24px;
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-dim);
-    margin-bottom: 24px;
 }
 
+.project-story p {
+    display: inline;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+}
+
+.story-preview {
+    display: inline;
+}
+
+.story-full {
+    display: none;
+}
+
+.story-full.show {
+    display: inline;
+}
+
+.story-toggle {
+    display: inline;
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.story-toggle:hover {
+    opacity: 0.7;
+}
+
+.story-toggle .material-symbol {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.story-toggle.active .material-symbol {
+    transform: rotate(180deg);
+}
+
+/* ============================================================
+   PROJECT TAGS - Updated for more tags
+   ============================================================ */
 .project-tags {
     display: flex;
     flex-wrap: wrap;
@@ -688,6 +744,12 @@ section {
     color: var(--on-surface-variant);
     border: 1px solid var(--border-low-contrast);
     padding: 4px 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-tags span:hover {
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .project-actions {

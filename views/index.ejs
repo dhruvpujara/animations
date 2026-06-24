@@ -204,23 +204,45 @@
                 <div class="project-info">
                     <div class="project-code">#001 // WEB_APP</div>
                     <h4>Ad-Free Music Streaming</h4>
-                    <p>
-                        DD Music 29 is a completely free, ad-free music streaming web application
-                        developed to provide uninterrupted listening. Featuring a vast library across
-                        genres with no subscription fees. Optimized for low-latency performance and
-                        cross-device compatibility.
-                    </p>
+
+                    <!-- Story with Show More functionality -->
+                    <div class="project-story" id="project-story">
+                        <p class="story-preview" id="story-preview">
+                            DDMusic is my first full-stack project, built using EJS, MongoDB, Mongoose, and Express.
+                            What started as a slow and unpolished music platform evolved into a smoother, more
+                            feature-rich experience through continuous iteration.
+                        </p>
+                        <div class="story-full" id="story-full" style="display: none;">
+                            <p>
+                                DDMusic is my first full-stack project, built using EJS, MongoDB, Mongoose, and Express.
+                                What started as a slow and unpolished music platform evolved into a smoother, more
+                                feature-rich experience through continuous iteration.
+                                I introduced features like shared playlists and dynamic playlist generation, focusing on
+                                improving usability and performance over time.
+                                This project reflects my ability to take something from a rough prototype to a more
+                                refined product that people can actually use and enjoy.
+                            </p>
+                        </div>
+                        <button class="story-toggle" id="story-toggle" onclick="toggleStory()">Show More</button>
+                    </div>
+
                     <div class="project-tags">
                         <span>[ HTML5 ]</span>
                         <span>[ CSS3 ]</span>
                         <span>[ NODE.JS ]</span>
+                        <span>[ EXPRESS ]</span>
+                        <span>[ MONGODB ]</span>
+                        <span>[ MONGOOSE ]</span>
+                        <span>[ EJS ]</span>
+                        <span>[ JWT ]</span>
                     </div>
                     <div class="project-actions">
-                        <a href="#" class="btn-primary btn-compact">
+                        <a href="https://ddmusic29.onrender.com" target="_blank" class="btn-primary btn-compact">
                             EXECUTE_LAUNCH_SITE
                             <span class="material-symbol" style="font-size:16px;">open_in_new</span>
                         </a>
-                        <a href="#" class="btn-secondary btn-compact">
+                        <a href="https://github.com/dhruvpujara/ddmusic" target="_blank"
+                            class="btn-secondary btn-compact">
                             SOURCE_CODE
                             <span class="material-symbol" style="font-size:16px;">code</span>
                         </a>
